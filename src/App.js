@@ -1,10 +1,13 @@
 import React from "react";
 import "./styles.css";
+import MenuAppBar from "./components/MenuAppBar";
 
 export default function App() {
   return (
-    <div className="App">
-      <h1>Argonne - Material Science Experiments</h1>
+    <div>
+      <MenuAppBar />
+      <div className="App">
+      </div>
     </div>
   );
 }
