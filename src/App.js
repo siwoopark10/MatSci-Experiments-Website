@@ -7,10 +7,14 @@ export default function App() {
   return (
     <div>
       <MenuAppBar />
-      <div className="App">
-      </div>
       <NavTabs />
 
+
+      {/* <div className="App">
+      
+      </div> */}
+      <NavTabs />
+      
     </div>
   );
 }

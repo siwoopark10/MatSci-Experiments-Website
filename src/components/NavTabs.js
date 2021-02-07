@@ -10,6 +10,7 @@ import ParameterTextBox from './ParameterTextBox';
 import TemperatureSlider from './TemperatureSlider';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
+import InputSlider from './InputSlider';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -110,6 +111,15 @@ export default function NavTabs() {
         <div>
           <ParameterTextBox />
           <TemperatureSlider />
+
+        <ParameterTextBox />
+        <TemperatureSlider />
+        <TemperatureSlider />
+        <TemperatureSlider />
+        <TemperatureSlider />
+        <TemperatureSlider />
+        <TemperatureSlider />
+        {/* <InputSlider /> */}
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
