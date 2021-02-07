@@ -35,13 +35,13 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+export default function TemperatureSlider() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Typography id="discrete-slider-custom" gutterBottom>
-        Custom marks
+        Temperature
       </Typography>
       <Slider
         defaultValue={20}
