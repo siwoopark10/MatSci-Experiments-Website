@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ParameterTextBox from './ParameterTextBox';
 import TemperatureSlider from './TemperatureSlider';
+import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 import InputSlider from './InputSlider';
 
 function TabPanel(props) {
@@ -70,6 +72,8 @@ export default function NavTabs() {
     setValue(newValue);
   };
 
+  const [fileUpload, setFileUpload] = useState(null);
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -86,6 +90,9 @@ export default function NavTabs() {
       </AppBar>
       <TabPanel value={value} index={0}>
         <div>
+          <ParameterTextBox />
+          <TemperatureSlider />
+
         <ParameterTextBox />
         <TemperatureSlider />
         <TemperatureSlider />
@@ -97,7 +104,20 @@ export default function NavTabs() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page Two
+        <div>
+          <input type="file" onChange={(e) => {
+            var output = document.getElementById('fileList');
+            var children = "";
+            for (var i = 0; i < e.target.files.length; ++i) {
+              children += '<li>' + e.target.files[i].name + '</li>';
+            }
+            output.innerHTML = '<ul>' + children + '</ul>';
+          }} multiple /><br></br>
+          <label id="fileList"/>
+          <Button variant="contained" color="primary">
+            Upload
+          </Button>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         Page Three
