@@ -64,25 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
-// function FilesList(e) {
-//   var i;
-//   for (i = 0; i < e.target.files.length; i++) {
-//     console.log(e.target.files[i].name);
-//   }
-//   setFileUpload(e.target.files[0].name)
-
-//   var output = document.getElementById('fileList');
-//   var children = "";
-//   for (var i = 0; i < input.files.length; ++i) {
-//     children += '<li>' + input.files.item(i).name + '</li>';
-//   }
-//   output.innerHTML = '<ul>' + children + '</ul>';
-// }
-
-
-
 export default function NavTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);

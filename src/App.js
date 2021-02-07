@@ -9,11 +9,6 @@ export default function App() {
       <MenuAppBar />
       <NavTabs />
 
-
-      {/* <div className="App">
-      
-      </div> */}
-      <NavTabs />
       
     </div>
   );
