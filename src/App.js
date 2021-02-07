@@ -8,12 +8,13 @@ export default function App() {
   return (
     <div>
       <MenuAppBar />
-      <div className="App">
+      {/* <div className="App">
       
-      </div>
+      </div> */}
       <NavTabs />
+      
       <ParameterTextBox/>
-      <Slider />
+      {/* <InputSlider /> */}
     </div>
   );
 }
