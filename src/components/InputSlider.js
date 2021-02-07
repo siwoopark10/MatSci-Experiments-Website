@@ -22,6 +22,7 @@ export default function InputSlider() {
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
+  
 
   const handleInputChange = (event) => {
     setValue(event.target.value === '' ? '' : Number(event.target.value));

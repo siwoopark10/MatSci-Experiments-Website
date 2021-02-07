@@ -2,55 +2,63 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import Input from '@material-ui/core/Input';
+// import InputRange from 'react-input-range';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     width: 300,
   },
-  margin: {
-    height: theme.spacing(3),
-  },
-}));
-
-const marks = [
-  {
-    value: 0,
-    label: '0°C',
-  },
-  {
-    value: 20,
-    label: '20°C',
-  },
-  {
-    value: 37,
-    label: '37°C',
-  },
-  {
-    value: 100,
-    label: '100°C',
-  },
-];
+});
 
 function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function DiscreteSlider() {
+export default function RangeSlider() {
   const classes = useStyles();
+  const [value, setValue] = React.useState([20, 37]);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleInputChange = (event) => {
+    setValue(event.target.value === '' ? '' : Number(event.target.value));
+  };
 
   return (
     <div className={classes.root}>
-      <Typography id="discrete-slider-custom" gutterBottom>
-        Custom marks
+      <Typography id="range-slider" gutterBottom>
+        Temperature range
       </Typography>
       <Slider
-        defaultValue={20}
-        getAriaValueText={valuetext}
-        aria-labelledby="discrete-slider-custom"
-        step={10}
+        value={value}
+        onChange={handleChange}
         valueLabelDisplay="auto"
-        marks={marks}
+        aria-labelledby="range-slider"
+        getAriaValueText={valuetext}
       />
+      {/* <InputRange
+        maxValue = {20}
+        minValue = {0}
+        value={this.state.value}
+        onChange={handleChange}
+        /> */}
+        
+      <Input
+            className={classes.input}
+            value={value}
+            margin="dense"
+            onChange={handleInputChange}
+            // onBlur={handleBlur}
+            inputProps={{
+              step: 10,
+              // min: 0,
+              // max: 100,
+              type: 'number',
+              'aria-labelledby': 'input-slider',
+            }}
+          />
     </div>
   );
 }
