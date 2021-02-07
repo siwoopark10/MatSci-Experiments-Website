@@ -3,6 +3,7 @@ import "./styles.css";
 import MenuAppBar from "./components/MenuAppBar";
 import NavTabs from "./components/NavTabs";
 import ParameterTextBox from "./components/ParameterTextBox";
+import DiscreteSlider from "./components/TemperatureSlider";
 
 export default function App() {
   return (
@@ -13,7 +14,7 @@ export default function App() {
       </div>
       <NavTabs />
       <ParameterTextBox/>
-      <Slider />
+      <DiscreteSlider />
     </div>
   );
 }
