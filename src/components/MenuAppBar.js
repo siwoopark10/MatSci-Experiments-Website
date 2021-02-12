@@ -11,6 +11,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,6 +70,7 @@ export default function MenuAppBar() {
                 color="inherit"
               >
                 <AccountCircle />
+                <Link to="/users">User</Link>
               </IconButton>
               <Menu
                 id="menu-appbar"
