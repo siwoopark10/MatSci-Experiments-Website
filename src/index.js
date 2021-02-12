@@ -13,7 +13,7 @@ const rootElement = document.getElementById("root");
 
 
 ReactDOM.render(
-  <Router>
+  <Router basename = "/science">
     <App />
   </Router>,
   rootElement
