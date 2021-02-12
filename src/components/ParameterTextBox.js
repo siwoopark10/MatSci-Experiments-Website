@@ -15,6 +15,8 @@ function ParameterTextBox(){
             <Grid container direction={"column"} spacing={5}>
              <Grid item>
                 <TextField id="parameter1" 
+                key= "parameter1"
+                margin="normal"
                 label="Enter Parameter1" 
                 color="secondary" 
                 variant="outlined"

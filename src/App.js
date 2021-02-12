@@ -5,9 +5,11 @@ import NavTabs from "./components/NavTabs";
 
 export default function App() {
   return (
+    
     <div>
       <MenuAppBar />
       <NavTabs />
+      
 
       
     </div>
