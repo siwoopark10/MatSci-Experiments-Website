@@ -30,6 +30,8 @@ export default function App() {
         <Route path="/about">
           <MenuAppBar />
         </Route>
+        <Route path="/users">
+        </Route>
         <Route path="/">
           <MenuAppBar />
           <NavTabs />
