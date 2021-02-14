@@ -9,8 +9,9 @@ import Box from '@material-ui/core/Box';
 import ParameterTextBox from './ParameterTextBox';
 import TemperatureSlider from './TemperatureSlider';
 import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
 import InputSlider from './InputSlider';
+import UploadExperiments from './UploadExperiments';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,7 +85,7 @@ export default function NavTabs() {
           aria-label="nav tabs example"
         >
           <LinkTab label="Input Experiment" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Generate Experiments" href="/trash" {...a11yProps(1)} />
+          <LinkTab label="Upload Experiments" href="/trash" {...a11yProps(1)} />
           <LinkTab label="More Info" href="/spam" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
@@ -104,20 +105,7 @@ export default function NavTabs() {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div>
-          <input type="file" onChange={(e) => {
-            var output = document.getElementById('fileList');
-            var children = "";
-            for (var i = 0; i < e.target.files.length; ++i) {
-              children += '<li>' + e.target.files[i].name + '</li>';
-            }
-            output.innerHTML = '<ul>' + children + '</ul>';
-          }} multiple /><br></br>
-          <label id="fileList"/>
-          <Button variant="contained" color="primary">
-            Upload
-          </Button>
-        </div>
+        <UploadExperiments />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Page Three
