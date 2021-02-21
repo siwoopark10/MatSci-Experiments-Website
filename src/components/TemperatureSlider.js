@@ -18,6 +18,8 @@ function valuetext(value) {
 export default function TemperatureSlider() {
   const classes = useStyles();
   const [value, setValue] = React.useState([20, 37]);
+  const [Lowerbound, setLowerbound] = React.useState(0);
+  // listen to useEffect
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -48,7 +50,7 @@ export default function TemperatureSlider() {
         
       <Input
             className={classes.input}
-            value={value}
+            //value={value}
             margin="dense"
             onChange={handleInputChange}
             // onBlur={handleBlur}
