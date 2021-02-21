@@ -11,6 +11,7 @@ import TemperatureSlider from './TemperatureSlider';
 import Input from '@material-ui/core/Input';
 import InputSlider from './InputSlider';
 import UploadExperiments from './UploadExperiments';
+import InputExperiments from "./InputExperiments";
 
 
 function TabPanel(props) {
@@ -90,19 +91,7 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <div>
-          <ParameterTextBox />
-          <TemperatureSlider />
-
-        <ParameterTextBox />
-        <TemperatureSlider />
-        <TemperatureSlider />
-        <TemperatureSlider />
-        <TemperatureSlider />
-        <TemperatureSlider />
-        <TemperatureSlider />
-        {/* <InputSlider /> */}
-        </div>
+        <InputExperiments />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <UploadExperiments />

@@ -3,6 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
 import {Grid} from '@material-ui/core'
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        display: 'inline-block',
+        // parameter6:{
+        //     paddingBottom: 10,
+        //     height: 100,
+        // }
+    //    parameter6:"margin: "
+    },
+}));
 
 function ParameterTextBox(){
     const classes = useStyles();
@@ -69,15 +79,5 @@ function ParameterTextBox(){
         </div>
     );
 }
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        parameter6:{
-            paddingBottom: 10,
-            height: 100,
-        }
-    //    parameter6:"margin: "
-    },
-}));
 
 export default ParameterTextBox;
