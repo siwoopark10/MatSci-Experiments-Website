@@ -2,3 +2,18 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.experiment-tab{
+  padding: 5px;
+  text-align: left;
+}
+
+.experiment-tab-data{
+  padding: 10px 20px;
+  border: 2px solid black;  
+  border-radius: 10px;
+}
+
+.upload-btn{
+  margin: 10px 0;
+}

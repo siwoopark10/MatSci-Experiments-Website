@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import firebase, { storage } from "../firebase";
 
@@ -17,18 +17,17 @@ function UploadExperiments() {
     }
 
     const handleUpload = () => {
-        for (let i = 0;i<experiments.length;i++) {
+        for (let i = 0; i < experiments.length; i++) {
             uploadFilesAsPromise(experiments[i]);
-        }       
+        }
     }
-    function uploadFilesAsPromise(file){
+    function uploadFilesAsPromise(file) {
         console.log(file);
-        return new Promise(function (resolve,reject){
-            const uploadFile = storage.ref(`experiments/${file.name}`).put(file);
-            
+        return new Promise(function (resolve, reject) {
+            const uploadFile = storage.ref('experiments'+ file.name).put(file);
             uploadFile.on(
                 "state_changed",
-                snapshot => {},
+                snapshot => { },
                 error => {
                     console.log(error);
                 },
@@ -38,21 +37,27 @@ function UploadExperiments() {
                         .child(file.name)
                         .getDownloadURL()
                         .then(url => {
-                        console.log(url);
-                    });
+                            console.log(url);
+                        });
                 }
-            ) 
+            )
         })
     }
 
-    return <div>
-          <input type="file" onChange={handleChange} multiple />
-          <br></br>
-          <label id="experimentList"/>
-          <Button variant="contained" color="primary" onClick={handleUpload}>
-            Upload
-          </Button>
+    return (
+        <div className="experiment-tab">
+            <div className="experiment-tab-data">
+                <input type="file" onChange={handleChange} multiple />
+                <br></br>
+                <label id="experimentList" />
+            </div>
+            <div className="upload-btn">
+                <Button variant="contained" color="primary" onClick={handleUpload}>
+                    Upload
+            </Button>
+            </div>
         </div>
+    )
 }
 
 export default UploadExperiments;
