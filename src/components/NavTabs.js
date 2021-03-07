@@ -97,7 +97,7 @@ export default function NavTabs() {
         <UploadExperiments />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Page Three
+        Edit existing experiment
       </TabPanel>
     </div>
   );

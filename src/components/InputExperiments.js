@@ -73,17 +73,24 @@ function InputExperiments() {
 
     const handleUpload = e => {
         e.preventDefault();
-        const experimentName = e.target.experimentName.value;
+        const experimentName = e.target.experimentName.value.toLowerCase();
         const abstract = e.target.abstract.value;
         Object.keys(inputDataset).forEach(key => {
             inputDataset[key].val = e.target[key].value
         });
         console.log(inputDataset);
-        database.ref("experiments/"+experimentName).set({
+        var uploadJSON = database.ref("unapprovedExperiments/"+experimentName).set({
             name: experimentName,
             abstract: abstract,
             data: inputDataset
-        });
+        },(error) => {
+            if (error) {
+              alert("Error")
+            } else {
+              alert("Upload successful")
+            }
+          });
+        // uploadJSON.on
     }
 
 
