@@ -79,7 +79,7 @@ function InputExperiments() {
             inputDataset[key].val = e.target[key].value
         });
         console.log(inputDataset);
-        var uploadJSON = database.ref("unapprovedExperiments/"+experimentName).set({
+        var uploadJSON = database.ref("foo/unapprovedExperiments/"+experimentName).set({
             name: experimentName,
             abstract: abstract,
             data: inputDataset

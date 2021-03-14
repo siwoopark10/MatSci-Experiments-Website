@@ -42,21 +42,21 @@ function UploadExperiments() {
                         break;
                     } },
                 error => {
-                    console.log(error);
+                    alert(error);
                 },
                 () => {
-                    alert("Files are uploaded to "+ experimentName)
+                    alert("File is uploaded to "+ experimentName)
                     uploadFile.snapshot.ref.getDownloadURL().then(url => {
                             console.log(url);
                             // possible improvements: find a way to add urls all at once, check for duplicate files
-                            database.ref("unapprovedExperiments").child(experimentName).get().then(function(snapshot) {
+                            database.ref("foo/unapprovedExperiments").child(experimentName).get().then(function(snapshot) {
                                 if (snapshot.exists()) {
                                     console.log(snapshot.val());
                                     alert(experimentName+" exits in database");
                                     var newPostKey = firebase.database().ref().child('posts').push().key;
                                     var storageFiles = url
                                     var updates = {};
-                                    updates['/unapprovedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
+                                    updates['foo/unapprovedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
                                     firebase.database().ref().update(updates);
                                 }
                                 else {
