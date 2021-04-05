@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,58 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import fire from './firebase';
+
+const App =() => {
+  const [user, setUser] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [hasAccount, setHasAccount] = useState(false);
+
+  const clearInputs = () => {
+    setEmail('');
+    setPassword('');
+  }
+  const clearErrors = () => {
+    setEmailError('');
+    setPasswordError('');
+  }
+
+  const handleSignUp= () => {
+    clearErrors();
+    fire
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .catch(err => {
+        switch(err.code){
+          case "auth/email-already-in-use":
+          case "auth/invalid-email":
+            setEmailError(err.message);
+            break;
+          case "auth/weak-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
+  }
+
+  const authListener = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        clearInputs();
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListerner();
+  }, []);
+}
 
 function Copyright() {
   return (
@@ -25,6 +77,7 @@ function Copyright() {
     </Typography>
   );
 }
+
 
 const useStyles = makeStyles((theme) => ({
   header: {

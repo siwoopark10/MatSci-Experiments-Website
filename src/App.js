@@ -12,13 +12,13 @@ import {
 export default function App() {
   return (
     
-    <div>
+
       <Switch>
         <Route path="/">
           <MenuAppBar />
           <NavTabs />
         </Route>
       </Switch>
-    </div>
+    
   );
 }

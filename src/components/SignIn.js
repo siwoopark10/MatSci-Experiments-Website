@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,8 +13,60 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { purple } from '@material-ui/core/colors';
+import fire from './firebase';
+
 // import { useHistory } from "react-router-dom";
 
+const App =() => {
+  const [user, setUser] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [hasAccount, setHasAccount] = useState(false);
+
+  const clearInputs = () => {
+    setEmail('');
+    setPassword('');
+  }
+  const clearErrors = () => {
+    setEmailError('');
+    setPasswordError('');
+  }
+  const handleLogin = () => {
+    clearErrors();
+    fire
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(err => {
+        switch(err.code){
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+            setEmailError(err.message);
+            break;
+          case "auth/wrong-password":
+            setPasswordError(err.message);
+            break;
+        }
+      });
+  }
+  const authListener = () => {
+    fire.auth().onAuthStateChanged((user) => {
+      if (user) {
+        clearInputs();
+        setUser(user);
+      } else {
+        setUser("");
+      }
+    });
+  };
+
+  useEffect(() => {
+    authListerner();
+  }, []);
+  
+}
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -73,7 +125,22 @@ export default function SignIn() {
 //     marginTop: 10,
 // }
   return (
-    
+  
+    // <SignIn 
+    //   email={email} 
+    //   setEmail={setEmail} 
+    //   password={password}
+    //   setPassword={setPassword}
+    //   handleLogIn={handleLogIn}
+    //   handleSignUp={handleSignUp}
+    //   hasAccount={hasAccount}
+    //   setAccount={setAccount}
+    //   emailError={emailError}
+    //   passwordError={passwordError}>
+        
+    //   </SignIn>
+ 
+  
     <Container component="main" maxWidth="xs">
         <div className={classes.header}>
         <header>Argonne- Material Science Experiments
@@ -143,5 +210,6 @@ export default function SignIn() {
         <Copyright />
       </Box>
     </Container>
+
   );
 }
