@@ -7,7 +7,8 @@ import Input from '@material-ui/core/Input';
 
 const useStyles = makeStyles({
   root: {
-    width: 300,
+    // width: 300,
+    display: 'inline-block',
   },
 });
 
@@ -30,17 +31,17 @@ export default function TemperatureSlider() {
 
   return (
     <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
+      <Typography id="range-slider" style={{'display': 'inline'}} gutterBottom>
         Temperature range
-
+        <Slider
+                value={value}
+                onChange={handleChange}
+                valueLabelDisplay="auto"
+                aria-labelledby="range-slider"
+                getAriaValueText={valuetext}
+              />
       </Typography>
-      <Slider
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
-      />
+      
       {/* <InputRange
         maxValue = {20}
         minValue = {0}
