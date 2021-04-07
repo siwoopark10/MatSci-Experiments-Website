@@ -44,11 +44,11 @@ function InputExperiments() {
     const inputDataset = {
         concentration: { val: 0, unit: "mol" },
         solvent: { val: 0, unit: "liters" },
-        annealingTemperature: { val: 0, unit: "celsius" },
+        annealingTemperature: { val: 0, unit: "Celsius" },
         annealingTime: { val: 0, unit: "sec" },
-        processingTemperature: { val: 0, unit: "celsius" },
+        processingTemperature: { val: 0, unit: "Celsius" },
         processingSpeed: { val: 0, unit: "rev/sec" },
-        inkTemperature: { val: 0, unit: "celsius" }
+        inkTemperature: { val: 0, unit: "Celsius" }
     }
 
     function InputData(){
