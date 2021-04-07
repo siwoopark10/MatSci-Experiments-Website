@@ -44,11 +44,11 @@ function InputExperiments() {
     const inputDataset = {
         concentration: { val: 0, unit: "mol" },
         solvent: { val: 0, unit: "liters" },
-        annealingTemperature: { val: 0, unit: "celcius" },
+        annealingTemperature: { val: 0, unit: "celsius" },
         annealingTime: { val: 0, unit: "sec" },
-        processingTemperature: { val: 0, unit: "celcius" },
+        processingTemperature: { val: 0, unit: "celsius" },
         processingSpeed: { val: 0, unit: "rev/sec" },
-        inkTemperature: { val: 0, unit: "celcius" }
+        inkTemperature: { val: 0, unit: "celsius" }
     }
 
     function InputData(){
@@ -100,9 +100,9 @@ function InputExperiments() {
             <div className="experiment-tab-data">
             <label>Experiment Name</label>
             <input id="experimentName" type='text' ></input>
-                <label style={{ 'display': 'block' }}>Experiment Description</label>
-                <TextareaAutosize id="abstract" aria-label="minimum height" style={{ 'minHeight': '5rem', 'width': '400px' }} placeholder="Abstract" />
-                <InputData />
+            <label style={{ 'display': 'block' }}>Experiment Description</label>
+            <TextareaAutosize id="abstract" aria-label="minimum height" style={{ 'minHeight': '5rem', 'width': '400px' }} placeholder="Abstract" />
+            <InputData />
                 {/* <TreeView
                     // className={classes.root}
                     defaultCollapseIcon={<ExpandMoreIcon />}
