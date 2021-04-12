@@ -25,7 +25,7 @@ function UploadExperiments() {
     function uploadFilesAsPromise(file,experimentName) {
         console.log(experimentName);
         return new Promise(function (resolve, reject) {
-            const uploadFile = storage.ref('unapprovedExperiments/'+ experimentName+"/"+ file.name).put(file);
+            const uploadFile = storage.ref('proposedExperiments/'+ experimentName+"/"+ file.name).put(file);
             uploadFile.on(
                 "state_changed",
                 snapshot => {
@@ -46,26 +46,26 @@ function UploadExperiments() {
                 },
                 () => {
                     alert("File is uploaded to "+ experimentName)
-                    uploadFile.snapshot.ref.getDownloadURL().then(url => {
-                            console.log(url);
-                            // possible improvements: find a way to add urls all at once, check for duplicate files
-                            database.ref("foo/unapprovedExperiments").child(experimentName).get().then(function(snapshot) {
-                                if (snapshot.exists()) {
-                                    console.log(snapshot.val());
-                                    alert(experimentName+" exits in database");
-                                    var newPostKey = firebase.database().ref().child('posts').push().key;
-                                    var storageFiles = url
-                                    var updates = {};
-                                    updates['foo/unapprovedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
-                                    firebase.database().ref().update(updates);
-                                }
-                                else {
-                                    alert(experimentName +" doesn't exist in database");
-                                }
-                            }).catch(function(error) {
-                                console.error(error);
-                            });
-                        });
+                    // uploadFile.snapshot.ref.getDownloadURL().then(url => {
+                    //         console.log(url);
+                    //         // possible improvements: find a way to add urls all at once, check for duplicate files
+                    //         database.ref("foo/proposedExperiments").child(experimentName).get().then(function(snapshot) {
+                    //             if (snapshot.exists()) {
+                    //                 console.log(snapshot.val());
+                    //                 // alert(experimentName+" exits in database");
+                    //                 var newPostKey = firebase.database().ref().child('posts').push().key;
+                    //                 var storageFiles = url
+                    //                 var updates = {};
+                    //                 updates['foo/proposedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
+                    //                 firebase.database().ref().update(updates);
+                    //             }
+                    //             else {
+                    //                 // alert(experimentName +" doesn't exist in database");
+                    //             }
+                    //         }).catch(function(error) {
+                    //             console.error(error);
+                    //         });
+                    //     });
                 }
             )
         })

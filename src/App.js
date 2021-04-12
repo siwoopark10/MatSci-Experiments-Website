@@ -2,6 +2,7 @@ import React from "react";
 import "./styles.css";
 import MenuAppBar from "./components/MenuAppBar";
 import NavTabs from "./components/NavTabs";
+import ApproveExperiments from './components/ApproveExperiments';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,9 +15,16 @@ export default function App() {
     
     <div>
       <Switch>
-        <Route path="/">
+        <Route path="/propose">
           <MenuAppBar />
           <NavTabs />
+        </Route>
+        <Route path="/approve">
+          <MenuAppBar />
+          <ApproveExperiments />
+        </Route>
+        <Route path="/approve/:id">
+          <MenuAppBar />
         </Route>
       </Switch>
     </div>

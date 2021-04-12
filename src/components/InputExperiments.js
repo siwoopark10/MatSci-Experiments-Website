@@ -10,7 +10,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-import firebase, { storage,database } from "../firebase";
+import { storage,database } from "../firebase";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,8 +21,6 @@ const useStyles = makeStyles(theme => ({
         },
     },
 }));
-
-
 
 function InputExperiments() {
     const classes = useStyles();
@@ -73,14 +71,16 @@ function InputExperiments() {
 
     const handleUpload = e => {
         e.preventDefault();
+        const experimentKey = database.ref("foo/proposedExperiments").push().key;
         const experimentName = e.target.experimentName.value.toLowerCase();
         const abstract = e.target.abstract.value;
         Object.keys(inputDataset).forEach(key => {
             inputDataset[key].val = e.target[key].value
         });
         console.log(inputDataset);
-        var uploadJSON = database.ref("foo/unapprovedExperiments/"+experimentName).set({
+        var uploadJSON = database.ref("foo/proposedExperiments/"+experimentKey).set({
             name: experimentName,
+            key: experimentKey,
             abstract: abstract,
             data: inputDataset
         },(error) => {

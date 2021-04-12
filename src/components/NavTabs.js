@@ -6,10 +6,6 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ParameterTextBox from './ParameterTextBox';
-import TemperatureSlider from './TemperatureSlider';
-import Input from '@material-ui/core/Input';
-import InputSlider from './InputSlider';
 import UploadExperiments from './UploadExperiments';
 import InputExperiments from "./InputExperiments";
 
@@ -87,7 +83,6 @@ export default function NavTabs() {
         >
           <LinkTab label="Input Experiment" href="/drafts" {...a11yProps(0)} />
           <LinkTab label="Upload Experiments" href="/trash" {...a11yProps(1)} />
-          <LinkTab label="More Info" href="/spam" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -95,9 +90,6 @@ export default function NavTabs() {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <UploadExperiments />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Edit existing experiment
       </TabPanel>
     </div>
   );
