@@ -1,8 +1,34 @@
 import React, { useState } from 'react';
+import { makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import firebase, { storage,database } from "../firebase";
 
-function UploadExperiments() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+            display: 'flex',
+        },
+    },
+    experimentTab: {
+        padding: '5px',
+        textAlign: 'left',
+        justifyContent: 'space-between',
+      },
+      experimentTabData: {
+        padding: '10px 20px',
+        border: '2px solid black',  
+        borderRadius: '10px',
+        justifyContent: 'space-evenly'
+      },
+      uploadBtn: {
+        margin: '10px 0',
+      }
+}));
+
+export default function UploadExperimentFiles() {
+    const classes = useStyles();
     const [experiments, setExperiments] = useState([])
 
     const handleChange = e => {
@@ -16,6 +42,7 @@ function UploadExperiments() {
         output.innerHTML = '<ul>' + children + '</ul>';
     }
 
+    // Upload each file as a promise to firebase storage
     const handleUpload = e => {
         e.preventDefault();
         for (let i = 0; i < experiments.length; i++) {
@@ -25,7 +52,7 @@ function UploadExperiments() {
     function uploadFilesAsPromise(file,experimentName) {
         console.log(experimentName);
         return new Promise(function (resolve, reject) {
-            const uploadFile = storage.ref('unapprovedExperiments/'+ experimentName+"/"+ file.name).put(file);
+            const uploadFile = storage.ref('proposedExperiments/'+ experimentName+"/"+ file.name).put(file);
             uploadFile.on(
                 "state_changed",
                 snapshot => {
@@ -46,35 +73,35 @@ function UploadExperiments() {
                 },
                 () => {
                     alert("File is uploaded to "+ experimentName)
-                    uploadFile.snapshot.ref.getDownloadURL().then(url => {
-                            console.log(url);
-                            // possible improvements: find a way to add urls all at once, check for duplicate files
-                            database.ref("foo/unapprovedExperiments").child(experimentName).get().then(function(snapshot) {
-                                if (snapshot.exists()) {
-                                    console.log(snapshot.val());
-                                    alert(experimentName+" exits in database");
-                                    var newPostKey = firebase.database().ref().child('posts').push().key;
-                                    var storageFiles = url
-                                    var updates = {};
-                                    updates['foo/unapprovedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
-                                    firebase.database().ref().update(updates);
-                                }
-                                else {
-                                    alert(experimentName +" doesn't exist in database");
-                                }
-                            }).catch(function(error) {
-                                console.error(error);
-                            });
-                        });
+                    // uploadFile.snapshot.ref.getDownloadURL().then(url => {
+                    //         console.log(url);
+                    //         // possible improvements: find a way to add urls all at once, check for duplicate files
+                    //         database.ref("foo/proposedExperiments").child(experimentName).get().then(function(snapshot) {
+                    //             if (snapshot.exists()) {
+                    //                 console.log(snapshot.val());
+                    //                 // alert(experimentName+" exits in database");
+                    //                 var newPostKey = firebase.database().ref().child('posts').push().key;
+                    //                 var storageFiles = url
+                    //                 var updates = {};
+                    //                 updates['foo/proposedExperiments/' + experimentName + '/inputFiles/'+newPostKey] = storageFiles;
+                    //                 firebase.database().ref().update(updates);
+                    //             }
+                    //             else {
+                    //                 // alert(experimentName +" doesn't exist in database");
+                    //             }
+                    //         }).catch(function(error) {
+                    //             console.error(error);
+                    //         });
+                    //     });
                 }
             )
         })
     }
 
     return (
-        <div className="experiment-tab">
+        <div className={classes.experimentTab}>
         <form noValidate autoComplete="off" onSubmit={handleUpload}>
-            <div className="experiment-tab-data">
+            <div className={classes.experimentTabData}>
             <label>Experiment Name</label>
             <input id="experimentName" type='text' ></input>
             <br></br>
@@ -82,7 +109,7 @@ function UploadExperiments() {
                 <br></br>
                 <label id="experimentList" />
             </div>
-            <div className="upload-btn">
+            <div className={classes.uploadBtn}>
                 <Button variant="contained" color="primary" type="submit">
                     Upload
             </Button>
@@ -91,5 +118,3 @@ function UploadExperiments() {
         </div>
     )
 }
-
-export default UploadExperiments;
