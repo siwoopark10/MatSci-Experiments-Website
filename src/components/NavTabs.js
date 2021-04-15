@@ -6,8 +6,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import UploadExperiments from './UploadExperiments';
-import InputExperiments from "./InputExperiments";
+import UploadExperimentFiles from './UploadExperimentFiles';
+import InputExperimentData from "./InputExperimentData";
 
 
 function TabPanel(props) {
@@ -86,10 +86,10 @@ export default function NavTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <InputExperiments />
+        <InputExperimentData />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <UploadExperiments />
+        <UploadExperimentFiles />
       </TabPanel>
     </div>
   );

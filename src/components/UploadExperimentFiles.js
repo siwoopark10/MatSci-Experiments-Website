@@ -1,8 +1,34 @@
 import React, { useState } from 'react';
+import { makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import firebase, { storage,database } from "../firebase";
 
-function UploadExperiments() {
+const useStyles = makeStyles(theme => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '25ch',
+            display: 'flex',
+        },
+    },
+    experimentTab: {
+        padding: '5px',
+        textAlign: 'left',
+        justifyContent: 'space-between',
+      },
+      experimentTabData: {
+        padding: '10px 20px',
+        border: '2px solid black',  
+        borderRadius: '10px',
+        justifyContent: 'space-evenly'
+      },
+      uploadBtn: {
+        margin: '10px 0',
+      }
+}));
+
+export default function UploadExperimentFiles() {
+    const classes = useStyles();
     const [experiments, setExperiments] = useState([])
 
     const handleChange = e => {
@@ -16,6 +42,7 @@ function UploadExperiments() {
         output.innerHTML = '<ul>' + children + '</ul>';
     }
 
+    // Upload each file as a promise to firebase storage
     const handleUpload = e => {
         e.preventDefault();
         for (let i = 0; i < experiments.length; i++) {
@@ -72,9 +99,9 @@ function UploadExperiments() {
     }
 
     return (
-        <div className="experiment-tab">
+        <div className={classes.experimentTab}>
         <form noValidate autoComplete="off" onSubmit={handleUpload}>
-            <div className="experiment-tab-data">
+            <div className={classes.experimentTabData}>
             <label>Experiment Name</label>
             <input id="experimentName" type='text' ></input>
             <br></br>
@@ -82,7 +109,7 @@ function UploadExperiments() {
                 <br></br>
                 <label id="experimentList" />
             </div>
-            <div className="upload-btn">
+            <div className={classes.uploadBtn}>
                 <Button variant="contained" color="primary" type="submit">
                     Upload
             </Button>
@@ -91,5 +118,3 @@ function UploadExperiments() {
         </div>
     )
 }
-
-export default UploadExperiments;
