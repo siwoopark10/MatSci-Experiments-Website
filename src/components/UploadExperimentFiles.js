@@ -3,23 +3,23 @@ import { makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import firebase, { storage,database } from "../firebase";
 
-const useStyles = makeStyles(theme => ({
-    experimentTab: {
-        padding: '5px',
-      },
-      experimentTabData: {
-        padding: '10px 20px',
-        border: '2px solid black',  
-        borderRadius: '10px',
-        justifyContent: 'space-evenly'
-      },
-      uploadBtn: {
-        margin: '10px 0',
-      }
-}));
+// const useStyles = makeStyles(theme => ({
+//     experimentTab: {
+//         padding: '5px',
+//       },
+//       experimentTabData: {
+//         padding: '10px 20px',
+//         border: '2px solid black',  
+//         borderRadius: '10px',
+//         justifyContent: 'space-evenly'
+//       },
+//       uploadBtn: {
+//         margin: '10px 0',
+//       }
+// }));
 
 export default function UploadExperimentFiles() {
-    const classes = useStyles();
+    // const classes = useStyles();
     const [fileName, setFileName] = useState([''])
     const [url, setUrl] = useState('')
     const [acquisitionFunction, setAcquisitionFunction] = useState('')
@@ -42,11 +42,12 @@ export default function UploadExperimentFiles() {
                 alert(error);
             },
             () => {
-                alert("Successfully uploaded to storage")
+                alert("Uploaded to storage")
                 uploadFile.snapshot.ref.getDownloadURL().then(url => {
                         console.log(url);
                         setUrl(url)
                     });
+                e.target.reset();
             }
         )
     }
@@ -62,21 +63,21 @@ export default function UploadExperimentFiles() {
                 if (error) {
                   alert("Error")
                 } else {
-                  alert("Upload to database")
+                  alert("Uploaded to database")
                 }
               })
         }
     },[url])
 
     return (
-        <div className={classes.experimentTab}>
+        <div className="container">
         <form noValidate autoComplete="off" onSubmit={handleUpload}>
-            <div className={classes.experimentTabData}>
-                <div>
+                <div className='title'>
+                    <h2>Upload New Experiment File</h2>
+                </div>
                     <label>Experiment Name</label>
                     <input id="experimentName" type='text' />
-                </div>
-                <div>
+                <div className='input-set'>
                     <label>Acquisition Function</label>
                     <select name="acquisitionFunction" id="acqusitionFunction">
                         <option value="greedy">Greedy Selection</option>
@@ -85,15 +86,14 @@ export default function UploadExperimentFiles() {
                         <option value="uncertainty">Uncertainty Selection</option>
                     </select>
                 </div>
-                <div>
-                    <label>The number of experiments to output</label>
-                    <input id='outputNumber' type='number'/>
+                <div className='input-set'>
+                    <label>Number of experiments to output</label>
+                    <input id='outputNumber' type='number' className='number-input'/>
                 </div>
-                <div>
+                <div className='input-set'>
                     <input id='experimentFile' type="file" onChange={(e)=>{setFileName(e.target.files[0].name)}} />
                 </div>
-            </div>
-            <div className={classes.uploadBtn}>
+            <div className='form-submit'>
                 <Button variant="contained" color="primary" type="submit">
                     Upload
                 </Button>

@@ -10,43 +10,35 @@ import {
 import { Button } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        padding: 10,
-        display: 'block',
-        // textAlign: 'center',
-    },
-    title: {
-        fontSize: '2rem',
-        padding: 5,
-    },
-    data: {
-        fontSize: '1.2rem',
-        padding: 5,
-    },
-    uploadBtn: {
-        margin: '10px 10px',
-        width: '400px',
-        display:'flex',
-        justifyContent: 'space-around'
-      }
-})); 
+// const useStyles = makeStyles(theme => ({
+//     root: {
+//         padding: 10,
+//         display: 'block',
+//         // textAlign: 'center',
+//     },
+//     uploadBtn: {
+//         margin: '10px 10px',
+//         width: '400px',
+//         display:'flex',
+//         justifyContent: 'space-around'
+//       }
+// })); 
 
 function ExperimentInfo(props) {
-    const classes = useStyles();
+    // const classes = useStyles();
     var dataKey = Object.keys(props.data)
     return (
         <div>
-            <div className={classes.title}>Experiment Name: {props.name}</div>
-            <div className={classes.data}>Description: {props.abstract}</div>
-            <div className={classes.data}>Proposed by: {props.fName} {props.lName}</div>
-            {dataKey.map((key) => (<div key={key} className={classes.data}>{key.slice(0,1).toUpperCase() + key.slice(1,key.length)}: {props.data[key].val} {props.data[key].unit}</div>))}
+            <h2 className='title'>Experiment Name: {props.name}</h2>
+            <label className='data-label'>Description: {props.abstract}</label>
+            <label className='data-label'>Proposed by: {props.fName} {props.lName}</label>
+            {dataKey.map((key) => (<label key={key} className='data-label'>{key.slice(0,1).toUpperCase() + key.slice(1,key.length)}: {props.data[key].val} {props.data[key].unit}</label>))}
         </div>)
 }
 
 
 export default function ProposedExperiment() {
-    const classes = useStyles();
+    // const classes = useStyles();
     const [isFetched, setIsFetched] = useState(false)
     var { id } = useParams();
     const [experimentInfo,setExperimentInfo] = useState([])
@@ -86,12 +78,12 @@ export default function ProposedExperiment() {
     }
     if (!redirect){
         return (
-        <div className={classes.root}>
+        <div className='container2'>
             {isFetched && <ExperimentInfo {...experimentInfo} />}
             <form noValidate autoComplete="off" onSubmit={handleUpload}>
                 <TextareaAutosize id="notes" aria-label="minimum height" 
                     style={{'minHeight': '5rem', 'width': '400px', 'display':'block' }} placeholder="Notes" />  
-                    <div className={classes.uploadBtn}>
+                    <div className='approve-reject-btn'>
                         <Button variant="contained" color="primary" type='submit' onClick={()=>(setExperimentApproved(true))}>Approve</Button>
                         <Button variant="contained" color="secondary" type='submit'>Reject</Button>
                     </div>

@@ -1,37 +1,48 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { storage,database } from "../firebase";
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch',
-            display: 'flex',
-        },
+
+const useStyles = makeStyles((theme) => ({
+    margin: {
+      margin: theme.spacing(1),
     },
-    experimentTab: {
-        padding: '5px',
-        textAlign: 'left',
-        justifyContent: 'space-between',
-      },
-      experimentTabData: {
-        padding: '10px 20px',
-        border: '2px solid black',  
-        borderRadius: '10px',
-      },
-    //   experimentInput: {
-    //     display:'flex',
-    //     justifyContent: 'space-between',
-    //   },
-      uploadBtn: {
-        margin: '10px 0',
-      }
-}));
+    textField: {
+      width: '25ch',
+    },
+  }));
+
+// const useStyles = makeStyles(theme => ({
+//     root: {
+//         '& > *': {
+//             margin: theme.spacing(1),
+//             width: '25ch',
+//             display: 'flex',
+//         },
+//     },
+//     experimentTab: {
+//         padding: '5px',
+//         textAlign: 'left',
+//         justifyContent: 'space-between',
+//       },
+//       experimentTabData: {
+//         padding: '10px 20px',
+//         border: '2px solid black',  
+//         borderRadius: '10px',
+//       },
+//       experimentInput: {
+//         display:'flex',
+//         justifyContent: 'space-between',
+//       },
+//       uploadBtn: {
+//         margin: '10px 0',
+//       }
+// }));
 
 export default function InputExperimentData() {
     const classes = useStyles();
@@ -57,7 +68,8 @@ export default function InputExperimentData() {
                     id={key}
                     variant="outlined"
                     placeholder= "0"
-                    style={{'marginBottom':'10px', 'display':'inline-block', 'marginLeft':'100px'}}
+                    className={clsx(classes.margin, classes.textField, 'data-text-field')}
+                    type="number"
                     InputProps={{
                         endAdornment: <InputAdornment position="start">{inputDataset[key].unit}</InputAdornment>,
                     }} 
@@ -93,31 +105,31 @@ export default function InputExperimentData() {
               alert("Error")
             } else {
               alert("Upload successful")
+              e.target.reset();
             }
           });
     }
 
 
     return (
-        <div className={classes.experimentTab}>
+        <div className='container'>
             <form noValidate autoComplete="off" onSubmit={handleUpload}>
-                <div className={classes.experimentTabData}>
-                    <div className={classes.experimentInput}>
-                        <label>Experiment Name</label>
-                        <input id="experimentName" type='text' ></input>
-                        <label>First Name</label>
-                        <input id="fName" type='text' ></input>
-                        <label>Last Name</label>
-                        <input id="lName" type='text' ></input>
-                        <label>Organization Name</label>
-                        <input id="orgName" type='text' ></input>
-                    </div>
-                    <label style={{ 'display': 'block' }}>Experiment Description</label>
-                    <TextareaAutosize id="abstract" aria-label="minimum height" 
-                        style={{'minHeight': '5rem', 'width': '400px' }} placeholder="Abstract" />
-                    <InputData />
+                <div className='title'>
+                    <h2>Propose New Experiment</h2>
                 </div>
-                <div className={classes.uploadBtn}>
+                    <label>Experiment Name</label>
+                    <input id="experimentName" type='text' ></input>
+                    <label>First Name</label>
+                    <input id="fName" type='text' ></input>
+                    <label>Last Name</label>
+                    <input id="lName" type='text' ></input>
+                    <label>Organization Name</label>
+                    <input id="orgName" type='text' ></input>
+                    <label>Experiment Description</label>
+                    <TextareaAutosize id="abstract" aria-label="minimum height" 
+                        placeholder="Abstract" />
+                <InputData />
+                <div className='form-submit'>
                     <Button variant="contained" color="primary" type="submit">
                         Upload
                     </Button>
