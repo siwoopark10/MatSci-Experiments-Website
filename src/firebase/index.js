@@ -15,9 +15,13 @@ const firebaseConfig = {
 const fire = firebase.initializeApp(firebaseConfig);
 export default fire;
 
-  firebase.initializeApp(firebaseConfig)
+if (!firebase.apps.length) {
+  firebase.initializeApp({});
+}else {
+  firebase.app(); // if already initialized, use that one
+}
 
   const storage = firebase.storage();
   const database = firebase.database();
 
-  export {storage,database, firebase as default};
+  export {storage,database};

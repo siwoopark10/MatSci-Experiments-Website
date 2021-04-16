@@ -23,8 +23,11 @@ const useStyles = makeStyles(theme => ({
         padding: '10px 20px',
         border: '2px solid black',  
         borderRadius: '10px',
-        justifyContent: 'space-evenly'
       },
+    //   experimentInput: {
+    //     display:'flex',
+    //     justifyContent: 'space-between',
+    //   },
       uploadBtn: {
         margin: '10px 0',
       }
@@ -54,7 +57,7 @@ export default function InputExperimentData() {
                     id={key}
                     variant="outlined"
                     placeholder= "0"
-                    style={{'marginBottom':'10px', 'display':'inline', 'marginLeft':'100px'}}
+                    style={{'marginBottom':'10px', 'display':'inline-block', 'marginLeft':'100px'}}
                     InputProps={{
                         endAdornment: <InputAdornment position="start">{inputDataset[key].unit}</InputAdornment>,
                     }} 
@@ -98,26 +101,28 @@ export default function InputExperimentData() {
     return (
         <div className={classes.experimentTab}>
             <form noValidate autoComplete="off" onSubmit={handleUpload}>
-            <div className={classes.experimentTabData}>
-                <label>Experiment Name</label>
-                <input id="experimentName" type='text' ></input>
-                <label>First Name</label>
-                <input id="fName" type='text' ></input>
-                <label>Last Name</label>
-                <input id="lName" type='text' ></input>
-                <label>Organization Name</label>
-                <input id="orgName" type='text' ></input>
-                <label style={{ 'display': 'block' }}>Experiment Description</label>
-                <TextareaAutosize id="abstract" aria-label="minimum height" 
-                    style={{'minHeight': '5rem', 'width': '400px' }} placeholder="Abstract" />
-                <InputData />
-            </div>
-            <div className={classes.uploadBtn}>
-                <Button variant="contained" color="primary" type="submit">
-                    Upload
-                </Button>
-            </div>
-        </form>
+                <div className={classes.experimentTabData}>
+                    <div className={classes.experimentInput}>
+                        <label>Experiment Name</label>
+                        <input id="experimentName" type='text' ></input>
+                        <label>First Name</label>
+                        <input id="fName" type='text' ></input>
+                        <label>Last Name</label>
+                        <input id="lName" type='text' ></input>
+                        <label>Organization Name</label>
+                        <input id="orgName" type='text' ></input>
+                    </div>
+                    <label style={{ 'display': 'block' }}>Experiment Description</label>
+                    <TextareaAutosize id="abstract" aria-label="minimum height" 
+                        style={{'minHeight': '5rem', 'width': '400px' }} placeholder="Abstract" />
+                    <InputData />
+                </div>
+                <div className={classes.uploadBtn}>
+                    <Button variant="contained" color="primary" type="submit">
+                        Upload
+                    </Button>
+                </div>
+            </form>
         </div>
     );
 }

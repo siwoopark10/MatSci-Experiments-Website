@@ -9,12 +9,17 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Home from "./components/Home";
 
 export default function App() {
   return (
     
 
       <Switch>
+        <Route exact path="/">
+          <MenuAppBar />
+          <Home />
+        </Route>
         <Route path="/propose">
           <MenuAppBar />
           <NavTabs />

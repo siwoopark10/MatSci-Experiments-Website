@@ -50,6 +50,7 @@ export default function ProposedExperiment() {
     const [isFetched, setIsFetched] = useState(false)
     var { id } = useParams();
     const [experimentInfo,setExperimentInfo] = useState([])
+    const [redirect, setRedirect] = useState(false)
     const [experimentApproved,setExperimentApproved] = useState(false)
 
     useEffect(() => {
@@ -78,20 +79,28 @@ export default function ProposedExperiment() {
               alert("Upload successful")
             }
           });
-        // var deleteJSON = database.ref("foo/proposedExperiments/"+tempJson.key).remove();
+        var deleteJSON = database.ref("foo/proposedExperiments/"+tempJson.key).remove();
+        setRedirect(true)
+        setIsFetched(false)
+        
     }
-    
-    return (
-      <div className={classes.root}>
-        {isFetched && <ExperimentInfo {...experimentInfo} />}
-        <form noValidate autoComplete="off" onSubmit={handleUpload}>
-            <TextareaAutosize id="notes" aria-label="minimum height" 
-                style={{'minHeight': '5rem', 'width': '400px', 'display':'block' }} placeholder="Notes" />
-            <div className={classes.uploadBtn}>
-                <Button variant="contained" color="primary" type='submit' onClick={()=>(setExperimentApproved(true))}>Approve</Button>
-                <Button variant="contained" color="secondary" type='submit'>Reject</Button>
-            </div>
-        </form>
-      </div>
-    );
+    if (!redirect){
+        return (
+        <div className={classes.root}>
+            {isFetched && <ExperimentInfo {...experimentInfo} />}
+            <form noValidate autoComplete="off" onSubmit={handleUpload}>
+                <TextareaAutosize id="notes" aria-label="minimum height" 
+                    style={{'minHeight': '5rem', 'width': '400px', 'display':'block' }} placeholder="Notes" />  
+                    <div className={classes.uploadBtn}>
+                        <Button variant="contained" color="primary" type='submit' onClick={()=>(setExperimentApproved(true))}>Approve</Button>
+                        <Button variant="contained" color="secondary" type='submit'>Reject</Button>
+                    </div>
+            </form>
+        </div>
+        );
+    } else {
+        return(
+            <Redirect to="/approve" />
+        )
+    }
   }
