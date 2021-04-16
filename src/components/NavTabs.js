@@ -70,8 +70,6 @@ export default function NavTabs() {
     setValue(newValue);
   };
 
-  const [fileUpload, setFileUpload] = useState(null);
-
   return (
     <div className={classes.root}>
       <AppBar position="static">

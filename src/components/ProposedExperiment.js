@@ -10,20 +10,6 @@ import {
 import { Button } from '@material-ui/core';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-// const useStyles = makeStyles(theme => ({
-//     root: {
-//         padding: 10,
-//         display: 'block',
-//         // textAlign: 'center',
-//     },
-//     uploadBtn: {
-//         margin: '10px 10px',
-//         width: '400px',
-//         display:'flex',
-//         justifyContent: 'space-around'
-//       }
-// })); 
-
 function ExperimentInfo(props) {
     // const classes = useStyles();
     var dataKey = Object.keys(props.data)

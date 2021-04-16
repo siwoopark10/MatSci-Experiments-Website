@@ -9,6 +9,7 @@
   box-sizing: border-box;
   width: 75%;
   padding: 40px;
+  margin: auto;
   background-color: #f2f2f2;
 }
 
@@ -26,7 +27,6 @@ h2 {
   text-align: left;
   flex: 100%;
   margin: 0px 0px 20px;
-  
 }
 
 input[type=text] {
@@ -58,8 +58,6 @@ label {
 }
 
 .data-text-field {
-  width:100%;
-  display: inline-block;
   background-color: white;
 }
 
@@ -86,4 +84,8 @@ label {
   margin: 12px;
   display: flex;
   justify-content: space-around;
+}
+
+.experiment-parameter {
+  margin-bottom: 10px;
 }

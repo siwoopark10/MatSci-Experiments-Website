@@ -7,7 +7,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
 import { storage,database } from "../firebase";
 
-
 const useStyles = makeStyles((theme) => ({
     margin: {
       margin: theme.spacing(1),
@@ -16,33 +15,6 @@ const useStyles = makeStyles((theme) => ({
       width: '25ch',
     },
   }));
-
-// const useStyles = makeStyles(theme => ({
-//     root: {
-//         '& > *': {
-//             margin: theme.spacing(1),
-//             width: '25ch',
-//             display: 'flex',
-//         },
-//     },
-//     experimentTab: {
-//         padding: '5px',
-//         textAlign: 'left',
-//         justifyContent: 'space-between',
-//       },
-//       experimentTabData: {
-//         padding: '10px 20px',
-//         border: '2px solid black',  
-//         borderRadius: '10px',
-//       },
-//       experimentInput: {
-//         display:'flex',
-//         justifyContent: 'space-between',
-//       },
-//       uploadBtn: {
-//         margin: '10px 0',
-//       }
-// }));
 
 export default function InputExperimentData() {
     const classes = useStyles();
@@ -62,7 +34,7 @@ export default function InputExperimentData() {
         var rows=[]
         Object.keys(inputDataset).forEach(key => {
             var text = key.slice(0,1).toUpperCase() + key.slice(1, key.length);
-            rows.push(<div key={key}>
+            rows.push(<div key={key} className='experiment-parameter'>
                 <label>{text}</label>
                 <TextField
                     id={key}
@@ -109,7 +81,6 @@ export default function InputExperimentData() {
             }
           });
     }
-
 
     return (
         <div className='container'>

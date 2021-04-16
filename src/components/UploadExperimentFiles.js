@@ -1,22 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles} from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import firebase, { storage,database } from "../firebase";
-
-// const useStyles = makeStyles(theme => ({
-//     experimentTab: {
-//         padding: '5px',
-//       },
-//       experimentTabData: {
-//         padding: '10px 20px',
-//         border: '2px solid black',  
-//         borderRadius: '10px',
-//         justifyContent: 'space-evenly'
-//       },
-//       uploadBtn: {
-//         margin: '10px 0',
-//       }
-// }));
+import { storage,database } from "../firebase";
 
 export default function UploadExperimentFiles() {
     // const classes = useStyles();
