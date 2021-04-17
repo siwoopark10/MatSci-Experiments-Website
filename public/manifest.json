@@ -1,0 +1,6 @@
+{
+    "name": "Argonne - Material Science Experiments",
+    "short_name": "Mat_sci experiment",
+    "display": "standalone",
+    "start_url": "/index.html"
+}
