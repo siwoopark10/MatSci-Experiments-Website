@@ -1,4 +1,5 @@
 import { useState} from 'react'; 
+import Button from '@material-ui/core/Button';
 
 const Uploader = () => {
     const [result, setResult] = useState();  
@@ -65,12 +66,15 @@ const Uploader = () => {
     }
     return (
         <div id="upload-box">
-            <input type="file" onChange={handleUpload1} />
+            <input type="file" onChange={handleUpload1}/>
             <p>Filename: {file.name}</p>
             <p>File type: {file.type}</p>
             <p>File size: {file.size} bytes</p>
             {/* {file && <ImageThumb image={file} />} */}
-            <button type="submit" onClick={onClickHandler}>Upload</button> 
+            <Button variant="contained" color="primary" type="submit" onClick={onClickHandler}>
+                    Upload
+            </Button>
+            {/* <button type="submit" onClick={onClickHandler}>Upload</button>  */}
             {/* <button type = "submit" onClick={onDownload}>Download</button> */}
         </div>
     );
