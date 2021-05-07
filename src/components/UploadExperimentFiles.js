@@ -111,9 +111,9 @@ export default function UploadExperimentFiles() {
                 </div>
                     <label>Experiment Name</label>
                     <input id="experimentName" type='text' />
-                <div className='input-set'>
+                {/* <div className='input-set'>
                     <label>Acquisition Function</label>
-                    <select name="acquisitionFunction" id="acqusitionFunction">
+                    <select name="acquisitionFunction" id="acqusitionFunction" >
                         <option value="greedy">Greedy Selection</option>
                         <option value="random">Random Selection</option>
                         <option value="mcal">MCAL Selection</option>
@@ -123,7 +123,7 @@ export default function UploadExperimentFiles() {
                 <div className='input-set'>
                     <label>Number of experiments to output</label>
                     <input id='outputNumber' type='number' className='number-input'/>
-                </div>
+                </div> */}
                 {/* <div className='input-set'>
                     <input id='experimentFile' type="file" onChange={(e)=>{setFileName(e.target.files[0].name)}} />
                 </div>

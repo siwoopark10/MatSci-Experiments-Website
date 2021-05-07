@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 
 const Uploader = () => {
     const [result, setResult] = useState();  
+    const [numExperiments, setExperiments] = useState(10); 
+    const [acquisition, setAcquisition] = useState("greedy"); 
     const [file, setFile] = useState("");
     const handleUpload1 = (event) => {
         console.log(event.target.files);
@@ -19,6 +21,12 @@ const Uploader = () => {
     }
     const onClickHandler = () => {
         let data = new FormData() 
+        let parameters = {numExperiments: numExperiments, acquisition: acquisition};
+        let json = JSON.stringify(parameters); 
+        const blob = new Blob([json], {
+            type: 'application/json'
+        });
+        data.append("parameters", blob);
         data.append('file', file)
         console.log(data); 
         let options = {
@@ -30,6 +38,7 @@ const Uploader = () => {
           .then(response => response.body)
           .then(body => {
               const reader = body.getReader()
+              console.log(reader)
               reader.read().then(function processText({done, value}){
                   let temp = ""
                   for (var i = 0; i < value.length; i++) {
@@ -66,6 +75,22 @@ const Uploader = () => {
     }
     return (
         <div id="upload-box">
+            <div className='input-set'>
+                <label>Acquisition Function</label>
+                <select name="acquisitionFunction" 
+                        id="acqusitionFunction" 
+                        onChange = {(e) => setAcquisition(e.target.value)}>
+                    <option value="greedy">Greedy Selection</option>
+                    <option value="random">Random Selection</option>
+                    <option value="mcal">MCAL Selection</option>
+                    <option value="uncertainty">Uncertainty Selection</option>
+                </select>
+            </div>
+            <div className='input-set'
+                onChange = {(e) => setExperiments(e.target.value)}>
+                <label>Number of experiments to output</label>
+                <input id='outputNumber' type='number' className='number-input'/>
+            </div>
             <input type="file" onChange={handleUpload1}/>
             <p>Filename: {file.name}</p>
             <p>File type: {file.type}</p>
@@ -74,6 +99,8 @@ const Uploader = () => {
             <Button variant="contained" color="primary" type="submit" onClick={onClickHandler}>
                     Upload
             </Button>
+            <p>{ numExperiments }</p>
+            <p>{ acquisition }</p>
             {/* <button type="submit" onClick={onClickHandler}>Upload</button>  */}
             {/* <button type = "submit" onClick={onDownload}>Download</button> */}
         </div>
