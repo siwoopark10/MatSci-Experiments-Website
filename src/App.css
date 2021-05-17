@@ -29,7 +29,7 @@ h2 {
   margin: 0px 0px 20px;
 }
 
-input[type=text] {
+.parameter-input {
   width: 100%;
   padding: 5px 10px;
   border: 1px solid #ccc;
@@ -61,6 +61,11 @@ label {
   background-color: white;
 }
 
+.MuiOutlinedInput-input {
+  padding: 18.5px 14px;
+}
+
+
 .form-submit{
   margin-top: 15px;
 }
@@ -80,10 +85,10 @@ label {
   margin: 12px 0px;
 }
 
-.approve-reject-btn {
+.approve-deny-btn {
   margin: 12px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .experiment-parameter {

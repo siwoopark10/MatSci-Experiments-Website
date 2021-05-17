@@ -133,7 +133,7 @@ export default function UploadExperimentFiles() {
                 </Button>
             </div> */}
             </form>
-            <Uploader></Uploader>
+            <Uploader />
         </div>
     )
 }

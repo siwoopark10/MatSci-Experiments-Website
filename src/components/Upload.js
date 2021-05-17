@@ -99,8 +99,6 @@ const Uploader = () => {
             <Button variant="contained" color="primary" type="submit" onClick={onClickHandler}>
                     Upload
             </Button>
-            <p>{ numExperiments }</p>
-            <p>{ acquisition }</p>
             {/* <button type="submit" onClick={onClickHandler}>Upload</button>  */}
             {/* <button type = "submit" onClick={onDownload}>Download</button> */}
         </div>

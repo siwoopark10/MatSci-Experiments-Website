@@ -5,22 +5,10 @@ import {
   Checkbox, Link, Grid, Box, Typography, makeStyles, Container
 } from '@material-ui/core'
 import { Redirect } from 'react-router';
-import { database, loginWithEmail } from '../firebase/index';
+import { registerWithEmail, database } from '../firebase/index';
 import { UserContext } from '../UserContext';
+import { useHistory } from 'react-router-dom';
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+export default function Register() {
   const classes = useStyles();
   const { user, setUser } = useContext(UserContext)
   const [redirect, setRedirect] = useState(false)
@@ -50,16 +38,32 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const auth = await loginWithEmail(e.target.email.value, e.target.password.value)
+      const auth = await registerWithEmail(e.target.email.value, e.target.password.value)
+      const user = auth.user
       const email = e.target.email.value
+      const firstName = e.target.firstName.value
+      const lastName = e.target.lastName.value
+      const orgName = e.target.orgName.value
       const currUserId = auth.user.uid
+      const data = {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        orgName: orgName,
+        id: currUserId,
+        role: 'non-admin'
+      }
       var ref = database.ref('users/' + currUserId);
-      ref.on('value', (snapshot) => {
-        const data = snapshot.val();
-        console.log(data);
-        setUser(data)
-        setRedirect(true)
+      ref.set(data, (error) => {
+        if (error) {
+          alert("Error")
+        } else {
+          alert("Upload successful")
+        }
       })
+      console.log(data)
+      setUser(data)
+      setRedirect(true)
     } catch (error) {
       alert(error.message)
     }
@@ -82,9 +86,45 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Register
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
+            <TextField
+              autoComplete="firstName"
+              margin="normal"
+              name="firstName"
+              variant="outlined"
+              required
+              fullWidth
+              id="firstName"
+              label="First Name"
+              autoFocus
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              autoComplete="lastName"
+              margin="normal"
+              name="lastName"
+              variant="outlined"
+              required
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              autoFocus
+              InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+              autoComplete="orgName"
+              margin="normal"
+              name="orgName"
+              variant="outlined"
+              required
+              fullWidth
+              id="orgName"
+              label="Organization Name"
+              autoFocus
+              InputLabelProps={{ shrink: true }}
+            />
             <TextField
               variant="outlined"
               margin="normal"
@@ -129,16 +169,13 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href='/register' variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/signin" variant="body2">
+                  {"Already have an account? Sign In"}
                 </Link>
               </Grid>
             </Grid>
           </form>
         </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
       </Container>
     );
   }
