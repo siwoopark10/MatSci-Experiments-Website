@@ -58,10 +58,9 @@ export default function Register() {
         if (error) {
           alert("Error")
         } else {
-          alert("Upload successful")
+          console.log("Upload successful")
         }
       })
-      console.log(data)
       setUser(data)
       setRedirect(true)
     } catch (error) {

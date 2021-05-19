@@ -53,7 +53,7 @@ export default function ExperimentDetail() {
         } else {
             var ref = database.ref("experiments/denied/" + tempJson.experimentKey)
         }
-        var uploadJSON = ref.set(
+        ref.set(
             tempJson,
             (error) => {
                 if (error) {
@@ -62,7 +62,7 @@ export default function ExperimentDetail() {
                     console.log("uploaded")
                 }
             });
-        var deleteJSON = database.ref("experiments/proposed/" + tempJson.experimentKey).remove();
+        database.ref("experiments/proposed/" + tempJson.experimentKey).remove();
         setRedirect(true)
         setIsFetched(false)
     }
@@ -95,6 +95,9 @@ export default function ExperimentDetail() {
             </div>
         );
     } else {
-        { backToReview }
+        var url = "/" + user.id + "/review/"
+        return (
+            <Redirect to={url} />
+        )
     }
 }
